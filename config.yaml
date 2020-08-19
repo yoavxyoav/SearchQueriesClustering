@@ -1,0 +1,85 @@
+# Changing some of the configuration, such as model parameters, will result in retraining of some models.
+# Some however, will not lead to retraining (such as document tagging), as the saved filename on drive
+# is not affected by these properties.
+# Be alert for messages that warn you of file loading, and in case you do want to retrain, consider deleting
+# some saved models from drive, just to be sure you are actually using the preferences you see in this file.
+
+# Default column names
+queries_col: 'search_query'
+date_col: 'search_date'
+num_search_col: 'number_of_searches'
+
+# General preferences
+global:
+  always_load_files: False         # will load a model or a pickle file if it exists, and not retrain a model
+  always_save_files: True         # if a new model is trained, will save it to file overwriting old one
+  drastic_cleanup:  False         # always deletes **all** .pickle and .model files from the working directory. Be careful!
+  verbose:  False                 # default for functions value where there's a verbose argument
+  always_plot: False              # helper variable to control plotting
+  data_dir: './data/'             # scv directory
+  saved_models_dir: './models/'   # directory for .model (doc2vec) and .pickle (clustering objects) files
+  limit_dataframe: None           # sample this amount of samples from dataframe, None to disable.
+  dataframes_prefs: True          # if True, uses the next two DataFrame preferences
+  max_rows: 100
+  max_cols: 100
+
+# Aggregating preferences
+agg:
+  sum: ['number_of_searches', 'searches_with_clicks', 'listings_with_orders', 'orders']
+  mean: ['total_number_of_search_results']
+  first: ['most_common_sub_category_name', 'most_common_category_name']
+
+
+# TF-IDF Similarity configuration
+tf_idf:
+  max_samples: 20000
+
+# Doc2Vec (1) default parameters. Used as the **kwargs in create_doc2vec_model() (2) default filename
+doc2vec:
+  def_params:
+    vector_size: 20
+    min_count: 2
+    epochs: 200
+    window: 2
+  model_filename_postfix: '.doc2vec.model'
+  tagged_documents_features: [] # ['most_common_category_name']
+
+# K Means
+k_means:
+  def_params:
+    k: 750
+
+# Affinity Propagation
+aff_prop:
+  limit: 1000
+  def_params:
+    damping: 0.5
+    affinity: 'euclidean'
+
+# HDBScan
+hdbscan:
+  limit: None
+  def_params:
+    cluster_selection_epsilon: 0.005
+    min_samples: 1
+    min_cluster_size: 3
+    allow_single_cluster: False
+    cluster_selection_method: 'leaf' # eom
+    leaf_size: 3000
+
+# properties for name inference
+infer_name:
+  max:  2
+  n_sim: 1
+  method: 'half'  # choose: half, magnitude, lda
+
+# Daily Process
+daily:
+  skip_start: 5
+  max_total_days: 5  # the bigger this value is, the bigger ['global']['limit_dataframe'] should be!
+  interval: 5
+
+# Cluster Scoring
+scoring:
+  method: 'word_proportion'
+
