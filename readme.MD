@@ -4,6 +4,8 @@
 
 By Yoav Vollansky (ver. 0.1)
 
+Commit history is not available as the code was developed on a private repository and later uplodaed to GitHub.
+
 [TOC]
 
 ### 0. Introduction
@@ -76,7 +78,7 @@ In the root of the config, you can define some most useful columns as they appea
 
 *  `agg` settings
 
-  During preprocessing, `aggregate()` should be used , with columns set to `sum` being accumulated, with `mean` returning their average, and with `first` silly returning the first value in the column, all with respects to each specific **date**. 
+  During preprocessing, `aggregate()` should be used , with columns set to `sum` being accumulated, with `mean` returning their average, and with `first` simply returning the first value in the column, all with respects to each specific **date**. 
 
 * TF-IDF related preferences are specified in `tf_idf` (initial development, suspended at the moment)
 
